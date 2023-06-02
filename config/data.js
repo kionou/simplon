@@ -1,0 +1,1 @@
+let MONGO_URL = "mongodb+srv://livre:livre@cluster0.izddusc.mongodb.net/?retryWrites=true&w=majority"
