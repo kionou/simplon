@@ -1,11 +1,13 @@
 var express = require('express');
 const dataParticipant = require('../controllers/controPart');
+const { ValiderRegistre } = require('../middleware/validator');
 var router = express.Router();
+
 
 
 /* GET home page. */
 router.get('/',dataParticipant.getParticipant);
-router.post('/post',dataParticipant.postParticipant);
+router.post('/',ValiderRegistre,dataParticipant.postParticipant);
 router.get('/listes-participants',dataParticipant.AllParticipant);
 
 

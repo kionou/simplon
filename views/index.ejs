@@ -3,10 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accueil</title>
 </head>
 <body>
-  <p>bonjour le monde des vivants</p>
+ 
+  <%- include('../views/partials/navbar.ejs') %>
+  <div class="container">
+    <div class="content">
+      <h1>BIENVENU A L'EVENEMENT Google I/O </h1>
+    <p>Enregistrez un(e) participant(e)</p>
+    <% if (typeof success !="undefined" && success) { %>
+      <div class="success">
+        Enregistrement effectué avec success !
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    <% }%>
+   
+  
+    <% if (typeof alert !="undefined" && alert) { %>
+      <small class="cc">
+        <%= alert %> <br>
+      </small>
+   
+    <% }%>
+    <form class="form" method="post" action="/">
+      
+      
+      <!-- <div class="flex"> -->
+          <label>
+              <input required="" placeholder="" name="nom" type="text" class="input">
+              <span>Nom</span>
+          </label>
+          <% if (typeof erreur !="undefined" && erreur.nom) { %>
+            <div class="validation">
+              <%= erreur.nom.msg %> <br>
+            </div>
+          <% }%>
+  
+          <label>
+              <input required="" placeholder="" name="prenom" type="text" class="input">
+              <span>Prenom</span>
+          </label>
+          <% if (typeof erreur !="undefined" && erreur.prenom) { %>
+            <div class="validation">
+              <%= erreur.prenom.msg %> <br>
+            </div>
+          <% }%>
+      <!-- </div>   -->
+              
+      <label>
+          <input required="" placeholder="" type="email" name="email" class="input">
+          <span>Adress email</span>
+      </label> 
+      <% if (typeof erreur !="undefined" && erreur.email) { %>
+        <div class="validation">
+          <%= erreur.email.msg %> <br>
+        </div>
+      <% }%>
+      <label>
+          <input required="" type="tel" placeholder="" name="numero" class="input">
+          <span>Numéro de téléphone</span>
+      </label>
+      <% if (typeof erreur !="undefined" && erreur.numero) { %>
+        <div class="validation">
+          <%= erreur.numero.msg %> <br>
+        </div>
+      <% }%>
+     
+      
+      <button class="fancy" >
+        <span class="top-key"></span>
+        <span class="text">submit</span>
+        <span class="bottom-key-1"></span>
+        <span class="bottom-key-2"></span>
+      </button>
+  </form>
+
+    </div>
+    
+  </div>
+<script>
+
+  let reload = document.querySelector('.fa-solid')
+  reload.addEventListener('click',()=>{
+window.location.href = '/'
+  
+  })
+</script>
 </body>
 </html>

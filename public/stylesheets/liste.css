@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+  body{
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    background-color:#f4f5fa; 
+  }
+  .container{
+    /* border: 1px solid red; */
+    height: calc(100vh - 64px);
+    padding: 10px;
+    position: relative;
+    
+   
+  
+  }
+.content{
+
+ background-color: white;
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+
+}
+  .tableau {
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+
+}
+  
+  .tableau h2 {
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    text-transform: uppercase;
+    color: #171d8d;
+}
+.two-section {
+    position: relative;
+    min-height: 280px;
+    max-width: 1140px;
+    width: 96%;
+    padding: 0 10px;
+    height: auto;
+    margin: 0 auto;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
+
+    
+}
+
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,700;1,300&display=swap');
+
+
+.table__header h1 {
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5em;
+    font-family: 'Josefin Slab', serif;
+    color: #111;
+}
+
+.table__header h1 .produits {
+    font-family: 'Josefin Slab', serif;
+    color: #FF0000;
+    letter-spacing: -0.005em;
+    font-style: italic;
+
+
+}
+
+
+
+.table__header {
+    width: 100%;
+    padding: .8rem 2rem;
+    display: flex;
+    font-size: 16px;
+    text-transform: uppercase;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.table__header p {
+    font-size: 14px;
+    text-transform: initial;
+
+}
+
+.table__header i {
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    cursor: pointer;
+    visibility: hidden;
+
+}
+
+
+
+@media (max-width: 768px) {
+    .table__header {
+
+        font-size: 12px;
+    }
+
+
+}
+
+
+.table__body {
+    /* width: 99%; */
+    /* max-height: calc(89% - 9.6rem); */
+    margin: .8rem auto;
+    overflow: auto;
+    overflow: overlay;
+    padding-bottom:10px
+}
+
+.table__body::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table__body::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+table {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #2047e3;
+    text-transform: capitalize;
+    color: white;
+}
+
+
+
+tbody:nth-child(odd) tr:nth-child(odd) {
+    background-color: #0000000b;
+}
+
+tbody:nth-child(even) tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 10rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .table__header i {
+        visibility: visible;
+
+    }
+
+    .table__header p {
+        display: none;
+
+    }
+
+    .sidebar.close {
+        width: 40px;
+    }
+
+    .sidebar.close~.two-section {
+        left: 40px;
+        width: calc(100% - 40px);
+    }
+
+    .sidebar.close .nav-links li .link_name {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    table,
+    th,
+    td {
+        font-size: 12px;
+    }
+}
+
+.empty{
+
+width: 100%;
+height: 100%;
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    font-size: 22px;
+    color: #444;
+
+}
+
+

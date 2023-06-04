@@ -1,0 +1,39 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    <title>Navbar</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-header header">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/listes-participants">Liste</a></li>
+
+            </ul>
+            <h1 class="logo">
+                Google
+                
+            </h1>
+        </div>
+    </nav>
+</body>
+<script>
+
+    let reload = document.querySelector('.logo')
+    reload.addEventListener('click',()=>{
+  window.location.href = '/'
+    
+    })
+  </script>
+</html>
