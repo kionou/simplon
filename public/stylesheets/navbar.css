@@ -27,7 +27,8 @@
     background: #fff;
     color: #000;
     opacity: 0.85;
-    z-index: 100;
+    z-index: 100 !important;
+    position: relative;
 }
 
 .navbar-header.navbar-header{
@@ -67,7 +68,7 @@
 
 @media (max-width: 768px){
     .navbar{
-        opacity: 0.95;
+        opacity: 1;
     }
 
     .navbar-header.navbar-header input[type="checkbox"],
@@ -140,7 +141,6 @@
         padding-left: 40px;
         transition: transform 0.5s ease-in-out;
         box-shadow:  5px 0px 10px 0px #aaa;
-        overflow: scroll;
     }
 
     .navbar .menu-items li{
