@@ -21,11 +21,11 @@ const dataParticipant = class{
     }
 
     static postParticipant = async (req =request,res =response)=>{
-        console.log('posst',req.body);
+       
         const result = validationResult(req)
         if (!result.isEmpty() ) {
         const error = result.mapped()
-        console.log('rrfrrkrk',error ); 
+      
          res.render('index',{erreur:error})
        }else{
     
@@ -60,11 +60,51 @@ static getNotification = async (req =request,res =response)=>{
  
  }
 
+ static postNotifications = async (req =request,res =response)=>{
+        // Récupérer les données envoyées par CinetPay
+    const notificationData = req.body;
+  
+    // Afficher les données pour debug
+    console.log('Notification reçue :', notificationData);
+  
+    // Récupérer les valeurs importantes
+    const status = notificationData.status;
+    const uniqueCode = notificationData.uniqueCode;
+    const amount = notificationData.amount;
+    const name = notificationData.name;
+    const phone = notificationData.phone;
+    const emailclit = notificationData.emailclit;
+  
+    // Vérifier si le paiement a été accepté
+    if (status === 'ACCEPTED') {
+      console.log('Paiement réussi');
+      
+      // Exemple de traitement (par exemple, ajout à la base de données)
+      const subscriptionData = {
+        uniqueCode,
+        amount,
+        name,
+        emailclit,
+        phone,
+        status: 'Actif',
+        creationDate: new Date(),
+        expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Expiration dans 30 jours
+      };
+  
+      // Simuler l'ajout à la base de données (log ici pour l'exemple)
+      console.log('Abonnement créé:', subscriptionData);
+  
+      // Répondre à CinetPay pour confirmer que la notification a été bien reçue
+      res.status(200).send('Paiement accepté et traité');
+    } else {
+      console.log('Paiement échoué');
+      res.status(400).send('Paiement échoué');
+    }
 
+
+}
    
 }
-
- 
 
 
 module.exports = dataParticipant
