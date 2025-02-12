@@ -2,10 +2,6 @@ const { request,response } = require("express");
 const Participantdata = require("../other/requette");
 const { validationResult } = require("express-validator");
 
-
-
-
-
 const dataParticipant = class{
 
     static getParticipant = async (req =request,res =response)=>{
@@ -58,6 +54,11 @@ const dataParticipant = class{
 
 
 }
+
+static getNotification = async (req =request,res =response)=>{
+    res.render('notifications')
+ 
+ }
 
 
    
