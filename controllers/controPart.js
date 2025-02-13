@@ -69,21 +69,25 @@ static getNotification = async (req =request,res =response)=>{
     console.log('Notification reçuefff:', notificationData.cpm_error_message);
 
     // Vérifier si le statut est bien envoyé
-    if (notificationData.data && notificationData.data.status) {
-        const paymentStatus = notificationData.data.status;
-        console.log('Statut du paiement:', paymentStatus);
+    if (notificationData && notificationData.cpm_error_message) {
+       
 
-        // Effectuer des actions selon le statut de la transaction
-        if (paymentStatus === 'ACCEPTED') {
-            // Paiement réussi, effectuez des actions comme ajouter l'abonnement
-            console.log('Paiement accepté, traitement de l\'abonnement...');
+       
+        if (notificationData.cpm_error_message == 'PAYMENT_FAILED') {
+            console.log('Paiement échoué ou en attente');
+        //   res.status(200).render('notifications');
+        res.status(200).send({ message: 'Notification reçue avec succès' });
+
+           
+            
         } else {
             // Paiement échoué ou en attente
-            console.log('Paiement échoué ou en attente');
+            console.log('Paiement accepté, traitement de l\'abonnement...');
+           res.status(200).send({ message: 'Notification reçue avec succès' });
+
         }
         
-        // Répondre à CinetPay pour confirmer que la notification a été reçue
-        res.status(200).send({ message: 'Notification reçue avec succès' });
+    
     } else {
         // Si le statut n'est pas dans la notification, renvoyer une erreur
         res.status(400).send({ message: 'Statut de paiement manquant' });
