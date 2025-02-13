@@ -9,6 +9,7 @@ var router = express.Router();
 router.get('/',dataParticipant.getParticipant);
 router.post('/',ValiderRegistre,dataParticipant.postParticipant);
 router.get('/listes-participants',dataParticipant.AllParticipant);
+
 router.get('/notifications',dataParticipant.getNotification);
 router.post('/notifications',dataParticipant.postNotifications);
 

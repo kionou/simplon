@@ -61,46 +61,35 @@ static getNotification = async (req =request,res =response)=>{
  }
 
  static postNotifications = async (req =request,res =response)=>{
-        // Récupérer les données envoyées par CinetPay
+      // Récupérer le corps de la requête
     const notificationData = req.body;
-  
-    // Afficher les données pour debug
-    console.log('Notification reçue :', notificationData);
-  
-    // Récupérer les valeurs importantes
-    const status = notificationData.status;
-    const uniqueCode = notificationData.uniqueCode;
-    const amount = notificationData.amount;
-    const name = notificationData.name;
-    const phone = notificationData.phone;
-    const emailclit = notificationData.emailclit;
-  
-    // Vérifier si le paiement a été accepté
-    if (status === 'ACCEPTED') {
-      console.log('Paiement réussi');
-      
-      // Exemple de traitement (par exemple, ajout à la base de données)
-      const subscriptionData = {
-        uniqueCode,
-        amount,
-        name,
-        emailclit,
-        phone,
-        status: 'Actif',
-        creationDate: new Date(),
-        expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Expiration dans 30 jours
-      };
-  
-      // Simuler l'ajout à la base de données (log ici pour l'exemple)
-      console.log('Abonnement créé:', subscriptionData);
-  
-      // Répondre à CinetPay pour confirmer que la notification a été bien reçue
-      res.status(200).send('Paiement accepté et traité');
-    } else {
-      console.log('Paiement échoué');
-      res.status(400).send('Paiement échoué');
-    }
 
+    // Afficher la notification reçue (pour le débogage)
+    console.log('Notification reçue:', notificationData);
+
+    // Vérifier si le statut est bien envoyé
+    if (notificationData.data && notificationData.data.status) {
+        const paymentStatus = notificationData.data.status;
+        console.log('Statut du paiement:', paymentStatus);
+
+        // Effectuer des actions selon le statut de la transaction
+        if (paymentStatus === 'ACCEPTED') {
+            // Paiement réussi, effectuez des actions comme ajouter l'abonnement
+            console.log('Paiement accepté, traitement de l\'abonnement...');
+        } else {
+            // Paiement échoué ou en attente
+            console.log('Paiement échoué ou en attente');
+        }
+        
+        // Répondre à CinetPay pour confirmer que la notification a été reçue
+        res.status(200).send({ message: 'Notification reçue avec succès' });
+    } else {
+        // Si le statut n'est pas dans la notification, renvoyer une erreur
+        res.status(400).send({ message: 'Statut de paiement manquant' });
+    }
+
+  
+ 
 
 }
    
