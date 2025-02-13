@@ -66,6 +66,7 @@ static getNotification = async (req =request,res =response)=>{
 
     // Afficher la notification reçue (pour le débogage)
     console.log('Notification reçue:', notificationData);
+    console.log('Notification reçuefff:', notificationData.cpm_error_message);
 
     // Vérifier si le statut est bien envoyé
     if (notificationData.data && notificationData.data.status) {
