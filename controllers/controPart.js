@@ -72,10 +72,7 @@ const dataParticipant = class{
 
 }
 
-static getNotification = async (req =request,res =response)=>{
-    res.render('notifications')
- 
- }
+
 
  static postNotifications = async (req =request,res =response)=>{
     const notificationData = req.body;
@@ -104,6 +101,31 @@ if (status === "ACCEPTED") {
     }
 
 }
+
+static getNotification = async (req =request,res =response)=>{
+
+    const { transaction_id } = req.query;  // Récupérer l'ID de la transaction envoyé par CinetPay
+  
+    // Vérification du statut de la transaction
+    const status = await checkTransactionStatus(transaction_id);
+  
+    if (status) {
+      console.log('Statut de la transaction:', status);
+  
+      // Redirection selon le statut de la transaction
+      if (status === 'ACCEPTED') {
+        // Paiement réussi, rediriger vers la page de succès
+        res.redirect('https://simro.info/cartdor/');  // Remplacez par votre page de succès
+      } else {
+        // Paiement échoué, rediriger vers la page d'échec
+        res.redirect('https://simro.info/cartdor/politique.html');  // Remplacez par votre page d'échec
+      }
+    } else {
+      // Si le statut ne peut pas être récupéré, rediriger vers une page d'erreur
+      res.redirect('https://simro.info/cartdor/politique.html');  // Remplacez par votre page d'erreur
+    }
+
+ }
    
 }
 
