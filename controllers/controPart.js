@@ -70,11 +70,6 @@ const dataParticipant = class{
        
     }
 
-        
-
-        
-
-
 }
 
 static getNotification = async (req =request,res =response)=>{
@@ -99,13 +94,13 @@ console.log('Statut de la transaction' , status);
 
 if (status === "ACCEPTED") {
     console.log("✅ Paiement validé");
-    return res.status(200).json({ message: "Paiement validé" });
+    return res.status(200).redirect('https://simro.info/cartdor');
 } else if (status === "PENDING") {
     console.log("⏳ Paiement en attente");
-    return res.status(200).json({ message: "Paiement en attente" });
+    return res.status(200).redirect('https://simro.info/cartdor/politique.html');
 } else {
     console.log("❌ Paiement échoué ou annulé");
-    return res.status(400).json({ message: "Paiement échoué ou annulé" });
+    return res.status(400).redirect('https://simro.info/cartdor/contenus.html');
     }
 
 }
