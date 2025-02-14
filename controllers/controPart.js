@@ -2,6 +2,25 @@ const { request,response } = require("express");
 const Participantdata = require("../other/requette");
 const { validationResult } = require("express-validator");
 
+const API_KEY = "1536910383678539018fd155.59185723";
+const SITE_ID = "105885554";
+
+// Fonction pour vérifier le statut de la transaction via CinetPay
+async function checkTransactionStatus(transactionId) {
+    try {
+        const response = await axios.post("https://api-checkout.cinetpay.com/v2/payment/check", {
+            apikey: API_KEY,
+            site_id: SITE_ID,
+            transaction_id: transactionId
+        });
+
+        return response.data?.data?.status || "UNKNOWN"; // Retourne le statut ou "UNKNOWN"
+    } catch (error) {
+        console.error("Erreur API CinetPay:", error);
+        return "ERROR"; // En cas d'erreur
+    }
+}
+
 const dataParticipant = class{
 
     static getParticipant = async (req =request,res =response)=>{
@@ -61,40 +80,30 @@ static getNotification = async (req =request,res =response)=>{
  }
 
  static postNotifications = async (req =request,res =response)=>{
-      // Récupérer le corps de la requête
     const notificationData = req.body;
-
-    // Afficher la notification reçue (pour le débogage)
     console.log('Notification reçue:', notificationData);
-    console.log('Notification reçuefff:', notificationData.cpm_error_message);
+   // Vérifier si l'ID de transaction est présent
+   if (!notificationData || !notificationData.cpm_trans_id) {
+    return res.status(400).json({ message: "Transaction ID manquant" });
+}
 
-    // Vérifier si le statut est bien envoyé
-    if (notificationData && notificationData.cpm_error_message) {
-       
+const transactionId = notificationData.cpm_trans_id;
 
-       
-        if (notificationData.cpm_error_message == 'PAYMENT_FAILED') {
-            console.log('Paiement échoué ou en attente');
-        //   res.status(200).render('notifications');
-        res.status(200).send({ message: 'Notification reçue avec succès' });
+// Vérifier le statut via l'API CinetPay
+const status = await checkTransactionStatus(transactionId);
 
-           
-            
-        } else {
-            // Paiement échoué ou en attente
-            console.log('Paiement accepté, traitement de l\'abonnement...');
-           res.status(200).send({ message: 'Notification reçue avec succès' });
+console.log('Statut de la transaction' , status);
 
-        }
-        
-    
-    } else {
-        // Si le statut n'est pas dans la notification, renvoyer une erreur
-        res.status(400).send({ message: 'Statut de paiement manquant' });
+if (status === "ACCEPTED") {
+    console.log("✅ Paiement validé");
+    return res.status(200).json({ message: "Paiement validé" });
+} else if (status === "PENDING") {
+    console.log("⏳ Paiement en attente");
+    return res.status(200).json({ message: "Paiement en attente" });
+} else {
+    console.log("❌ Paiement échoué ou annulé");
+    return res.status(400).json({ message: "Paiement échoué ou annulé" });
     }
-
-  
- 
 
 }
    
@@ -102,3 +111,7 @@ static getNotification = async (req =request,res =response)=>{
 
 
 module.exports = dataParticipant
+
+
+
+
